@@ -22,13 +22,6 @@
     state: "{{ docker_package_state }}"
   when: not ansible_check_mode
 
-- name: Ensure Docker daemon config
-  template:
-    src: docker-daemon.json
-    dest: /etc/docker/daemon.json
-  notify: Restart docker
-  when: docker_enable_live_restore
-
 - name: Ensure docker-compose.
   get_url:
     url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_machine }}

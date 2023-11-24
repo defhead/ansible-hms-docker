@@ -9,13 +9,13 @@ container_restart_policy: unless-stopped
 container_enable_auto_updates: yes
 
 # The cron-style schedule for the watchtower container to check for updates in UTC time // default: "0 0 9 * * *"
-container_auto_update_schedule: "0 0 9 * * *"
+container_auto_update_schedule: "0 0 1 * * *"
 
 # Will stop and remove containers that you disable within the container map (defined below) // default: "yes"
 container_remove_orphans: yes
 
 # The timezone to use for the containers // default: "America/New_York"
-container_timezone: America/New_York
+container_timezone: Europe/Paris
 
 # User and Group ID's to use for the running processes in the containers (may cause or be the cause of permissions issues)
 #  default: "1234"

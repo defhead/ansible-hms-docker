@@ -1,0 +1,3 @@
+## Flaresolverr
+# Enables or disables the Flaresolverr container // default: no
+flaresolverr_enabled: no

@@ -2,7 +2,6 @@ SHELL := /bin/bash
 
 .DEFAULT_GOAL:=help
 
-DEFAULT_CONFS = vars/default/*.yml
 ADVANCED_CONFS = roles/hmsdocker/defaults/main/*.yml
 
 CUSTOM_CONF_DIR = ./vars/custom
@@ -26,14 +25,7 @@ _WARN := "\033[33m[%s]\033[0m %s\n"  # Yellow text for "printf"
 _TITLE := "\033[32m[%s]\033[0m %s\n" # Green text for "printf"
 _ERROR := "\033[31m[%s]\033[0m %s\n" # Red text for "printf"
 
-basic:
-	@if $(MAKE) -s confirm ; then \
-		mkdir -p $(CUSTOM_CONF_DIR); \
-		cp $(DEFAULT_CONFS) $(CUSTOM_CONF_DIR); \
-		mv $(CUSTOM_CONF_DIR)/main.yml $(CUSTOM_CONF_DIR)/main_custom.yml; \
-	fi
-
-advanced:
+prepare:
 	@if $(MAKE) -s confirm ; then \
 		mkdir -p $(CUSTOM_CONF_DIR); \
 		cp -n $(ADVANCED_CONFS) $(CUSTOM_CONF_DIR); \
@@ -47,7 +39,6 @@ apply:
 	@ansible-playbook -i inventory --connection local hms-docker.yml --diff
 
 help:
-	@echo make basic :: for a basic config
-	@echo make advanced :: for an advanced config
+	@echo make prepare :: copy vars files
 	@echo make check :: check for any changes without doing anything \(diff\)
 	@echo make apply :: apply any changes identified in the diff

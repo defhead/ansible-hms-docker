@@ -1,4 +1,3 @@
-
 #######################################################################
 # Computed variables
 # DO NOT MODIFY unless you want stuff to break
@@ -7,158 +6,49 @@
 # Container computed variables
 container_enabled_portainer: "{{ True if (hms_docker_container_map['portainer']['enabled'] is defined and hms_docker_container_map['portainer']['enabled']) else False }}"
 container_enabled_traefik: "{{ True if (hms_docker_container_map['traefik']['enabled'] is defined and hms_docker_container_map['traefik']['enabled']) else False }}"
-container_enabled_authentik: "{{ True if (hms_docker_container_map['authentik']['enabled'] is defined and hms_docker_container_map['authentik']['enabled']) else False }}"
 container_enabled_sonarr: "{{ True if (hms_docker_container_map['sonarr']['enabled'] is defined and hms_docker_container_map['sonarr']['enabled']) else False }}"
 container_enabled_radarr: "{{ True if (hms_docker_container_map['radarr']['enabled'] is defined and hms_docker_container_map['radarr']['enabled']) else False }}"
-container_enabled_bazarr: "{{ True if (hms_docker_container_map['bazarr']['enabled'] is defined and hms_docker_container_map['bazarr']['enabled']) else False }}"
-container_enabled_transmission: "{{ True if ((hms_docker_container_map['transmission']['enabled'] is defined and hms_docker_container_map['transmission']['enabled']) and (transmission_vpn_provider is defined and transmission_vpn_user is defined and transmission_vpn_pass is defined)) else False }}"
-container_enabled_overseerr: "{{ True if (hms_docker_container_map['overseerr']['enabled'] is defined and hms_docker_container_map['overseerr']['enabled']) else False }}"
 container_enabled_prowlarr: "{{ True if (hms_docker_container_map['prowlarr']['enabled'] is defined and hms_docker_container_map['prowlarr']['enabled']) else False }}"
-container_enabled_requestrr: "{{ True if (hms_docker_container_map['requestrr']['enabled'] is defined and hms_docker_container_map['requestrr']['enabled']) else False }}"
-container_enabled_plex: "{{ True if (hms_docker_container_map['plex']['enabled'] is defined and hms_docker_container_map['plex']['enabled']) else False }}"
-container_enabled_tautulli: "{{ True if (hms_docker_container_map['tautulli']['enabled'] is defined and hms_docker_container_map['tautulli']['enabled']) else False }}"
-container_enabled_nzbget: "{{ True if (hms_docker_container_map['nzbget']['enabled'] is defined and hms_docker_container_map['nzbget']['enabled']) else False }}"
-container_enabled_sabnzbd: "{{ True if (hms_docker_container_map['sabnzbd']['enabled'] is defined and hms_docker_container_map['sabnzbd']['enabled']) else False }}"
-container_enabled_tdarr: "{{ True if (hms_docker_container_map['tdarr']['enabled'] is defined and hms_docker_container_map['tdarr']['enabled']) else False }}"
 container_enabled_homepage: "{{ True if (hms_docker_container_map['homepage']['enabled'] is defined and hms_docker_container_map['homepage']['enabled']) else False }}"
-container_enabled_tailscale: "{{ True if (tailscale_enabled is defined and tailscale_enabled) else False }}"
 container_enabled_flaresolverr: '{{ True if (flaresolverr_enabled is defined and flaresolverr_enabled) else False }}'
 
 # Traefik computed variables
 traefik_enabled_traefik: "{{ True if (hms_docker_container_map['traefik']['traefik'] is defined and hms_docker_container_map['traefik']['traefik']) else False }}"
 traefik_enabled_portainer: "{{ True if (hms_docker_container_map['portainer']['traefik'] is defined and hms_docker_container_map['portainer']['traefik']) else False }}"
-traefik_enabled_authentik: "{{ True if (hms_docker_container_map['authentik']['traefik'] is defined and hms_docker_container_map['authentik']['traefik']) else False }}"
 traefik_enabled_sonarr: "{{ True if (hms_docker_container_map['sonarr']['traefik'] is defined and hms_docker_container_map['sonarr']['traefik']) else False }}"
 traefik_enabled_radarr: "{{ True if (hms_docker_container_map['radarr']['traefik'] is defined and hms_docker_container_map['radarr']['traefik']) else False }}"
-traefik_enabled_bazarr: "{{ True if (hms_docker_container_map['bazarr']['traefik'] is defined and hms_docker_container_map['bazarr']['traefik']) else False }}"
-traefik_enabled_transmission: "{{ True if (hms_docker_container_map['transmission']['traefik'] is defined and hms_docker_container_map['transmission']['traefik']) else False }}"
-traefik_enabled_overseerr: "{{ True if (hms_docker_container_map['overseerr']['traefik'] is defined and hms_docker_container_map['overseerr']['traefik']) else False }}"
 traefik_enabled_prowlarr: "{{ True if (hms_docker_container_map['prowlarr']['traefik'] is defined and hms_docker_container_map['prowlarr']['traefik']) else False }}"
-traefik_enabled_requestrr: "{{ True if (hms_docker_container_map['requestrr']['traefik'] is defined and hms_docker_container_map['requestrr']['traefik']) else False }}"
-traefik_enabled_plex: "{{ True if (hms_docker_container_map['plex']['traefik'] is defined and hms_docker_container_map['plex']['traefik']) else False }}"
-traefik_enabled_tautulli: "{{ True if (hms_docker_container_map['tautulli']['traefik'] is defined and hms_docker_container_map['tautulli']['traefik']) else False }}"
-traefik_enabled_nzbget: "{{ True if (hms_docker_container_map['nzbget']['traefik'] is defined and hms_docker_container_map['nzbget']['traefik']) else False }}"
-traefik_enabled_sabnzbd: "{{ True if (hms_docker_container_map['sabnzbd']['traefik'] is defined and hms_docker_container_map['sabnzbd']['traefik']) else False }}"
-traefik_enabled_tdarr: "{{ True if (hms_docker_container_map['tdarr']['traefik'] is defined and hms_docker_container_map['tdarr']['traefik']) else False }}"
 traefik_enabled_homepage: "{{ True if (hms_docker_container_map['homepage']['traefik'] is defined and hms_docker_container_map['homepage']['traefik']) else False }}"
-
 
 # Public container exposure computed variables
 expose_public_enabled_portainer: "{{ True if (hms_docker_container_map['portainer']['expose_to_public'] is defined and hms_docker_container_map['portainer']['expose_to_public']) else False }}"
-expose_public_enabled_authentik: "{{ True if (hms_docker_container_map['authentik']['expose_to_public'] is defined and hms_docker_container_map['authentik']['expose_to_public']) else False }}"
 expose_public_enabled_sonarr: "{{ True if (hms_docker_container_map['sonarr']['expose_to_public'] is defined and hms_docker_container_map['sonarr']['expose_to_public']) else False }}"
 expose_public_enabled_radarr: "{{ True if (hms_docker_container_map['radarr']['expose_to_public'] is defined and hms_docker_container_map['radarr']['expose_to_public']) else False }}"
-expose_public_enabled_bazarr: "{{ True if (hms_docker_container_map['bazarr']['expose_to_public'] is defined and hms_docker_container_map['bazarr']['expose_to_public']) else False }}"
-expose_public_enabled_transmission: "{{ True if (hms_docker_container_map['transmission']['expose_to_public'] is defined and hms_docker_container_map['transmission']['expose_to_public']) else False }}"
-expose_public_enabled_overseerr: "{{ True if (hms_docker_container_map['overseerr']['expose_to_public'] is defined and hms_docker_container_map['overseerr']['expose_to_public']) else False }}"
 expose_public_enabled_prowlarr: "{{ True if (hms_docker_container_map['prowlarr']['expose_to_public'] is defined and hms_docker_container_map['prowlarr']['expose_to_public']) else False }}"
-expose_public_enabled_requestrr: "{{ True if (hms_docker_container_map['requestrr']['expose_to_public'] is defined and hms_docker_container_map['requestrr']['expose_to_public']) else False }}"
-expose_public_enabled_plex: "{{ True if (hms_docker_container_map['plex']['expose_to_public'] is defined and hms_docker_container_map['plex']['expose_to_public']) else False }}"
-expose_public_enabled_tautulli: "{{ True if (hms_docker_container_map['tautulli']['expose_to_public'] is defined and hms_docker_container_map['tautulli']['expose_to_public']) else False }}"
-expose_public_enabled_nzbget: "{{ True if (hms_docker_container_map['nzbget']['expose_to_public'] is defined and hms_docker_container_map['nzbget']['expose_to_public']) else False }}"
-expose_public_enabled_sabnzbd: "{{ True if (hms_docker_container_map['sabnzbd']['expose_to_public'] is defined and hms_docker_container_map['sabnzbd']['expose_to_public']) else False }}"
-expose_public_enabled_tdarr: "{{ True if (hms_docker_container_map['tdarr']['expose_to_public'] is defined and hms_docker_container_map['tdarr']['expose_to_public']) else False }}"
 expose_public_enabled_homepage: "{{ True if (hms_docker_container_map['homepage']['expose_to_public'] is defined and hms_docker_container_map['homepage']['expose_to_public']) else False }}"
-
 
 # Container host port mapping computed variables
 expose_ports_enabled_portainer: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_portainer) else False }}"
-expose_ports_enabled_authentik: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_authentik) else False }}"
 expose_ports_enabled_sonarr: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_sonarr) else False }}"
 expose_ports_enabled_radarr: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_radarr) else False }}"
-expose_ports_enabled_bazarr: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_bazarr) else False }}"
-expose_ports_enabled_transmission: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_transmission) else False }}"
-expose_ports_enabled_overseerr: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_overseerr) else False }}"
 expose_ports_enabled_prowlarr: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_prowlarr) else False }}"
-expose_ports_enabled_requestrr: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_requestrr) else False }}"
-expose_ports_enabled_plex: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_plex) else False }}"
-expose_ports_enabled_tautulli: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_tautulli) else False }}"
-expose_ports_enabled_nzbget: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_nzbget) else False }}"
-expose_ports_enabled_sabnzbd: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_sabnzbd) else False }}"
-expose_ports_enabled_tdarr: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_tdarr) else False }}"
 expose_ports_enabled_homepage: "{{ True if (container_expose_ports or not container_enabled_traefik or not traefik_enabled_homepage) else False }}"
 expose_ports_enabled_flaresolverr: '{{ True if (container_expose_ports) else False }}'
-
-# Authentik computed variables
-authentik_enabled_globally: "{{ True if (container_enabled_authentik or authentik_enabled) else False }}"
-
-authentik_http_proxy_portainer: "{{ True if (hms_docker_container_map['portainer']['authentik_provider_type'] is defined and hms_docker_container_map['portainer']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_traefik: "{{ True if (hms_docker_container_map['traefik']['authentik_provider_type'] is defined and hms_docker_container_map['traefik']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_authentik: "{{ True if (hms_docker_container_map['authentik']['authentik_provider_type'] is defined and hms_docker_container_map['authentik']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_sonarr: "{{ True if (hms_docker_container_map['sonarr']['authentik_provider_type'] is defined and hms_docker_container_map['sonarr']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_radarr: "{{ True if (hms_docker_container_map['radarr']['authentik_provider_type'] is defined and hms_docker_container_map['radarr']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_bazarr: "{{ True if (hms_docker_container_map['bazarr']['authentik_provider_type'] is defined and hms_docker_container_map['bazarr']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_transmission: "{{ True if (hms_docker_container_map['transmission']['authentik_provider_type'] is defined and hms_docker_container_map['transmission']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_overseerr: "{{ True if (hms_docker_container_map['overseerr']['authentik_provider_type'] is defined and hms_docker_container_map['overseerr']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_prowlarr: "{{ True if (hms_docker_container_map['prowlarr']['authentik_provider_type'] is defined and hms_docker_container_map['prowlarr']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_requestrr: "{{ True if (hms_docker_container_map['requestrr']['authentik_provider_type'] is defined and hms_docker_container_map['requestrr']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_plex: "{{ True if (hms_docker_container_map['plex']['authentik_provider_type'] is defined and hms_docker_container_map['plex']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_tautulli: "{{ True if (hms_docker_container_map['tautulli']['authentik_provider_type'] is defined and hms_docker_container_map['tautulli']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_nzbget: "{{ True if (hms_docker_container_map['nzbget']['authentik_provider_type'] is defined and hms_docker_container_map['nzbget']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_sabnzbd: "{{ True if (hms_docker_container_map['sabnzbd']['authentik_provider_type'] is defined and hms_docker_container_map['sabnzbd']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_tdarr: "{{ True if (hms_docker_container_map['tdarr']['authentik_provider_type'] is defined and hms_docker_container_map['tdarr']['authentik_provider_type'] == 'proxy') else False }}"
-authentik_http_proxy_homepage: "{{ True if (hms_docker_container_map['homepage']['authentik_provider_type'] is defined and hms_docker_container_map['homepage']['authentik_provider_type'] == 'proxy') else False }}"
-
-
-
-authentik_enabled_traefik: "{{ True if ((hms_docker_container_map['traefik']['authentik'] is defined and hms_docker_container_map['traefik']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_traefik)) else False }}"
-authentik_enabled_sonarr: "{{ True if ((hms_docker_container_map['sonarr']['authentik'] is defined and hms_docker_container_map['sonarr']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_sonarr)) else False }}"
-authentik_enabled_radarr: "{{ True if ((hms_docker_container_map['radarr']['authentik'] is defined and hms_docker_container_map['radarr']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_radarr)) else False }}"
-authentik_enabled_bazarr: "{{ True if ((hms_docker_container_map['bazarr']['authentik'] is defined and hms_docker_container_map['bazarr']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_bazarr)) else False }}"
-authentik_enabled_transmission: "{{ True if ((hms_docker_container_map['transmission']['authentik'] is defined and hms_docker_container_map['transmission']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_transmission)) else False }}"
-authentik_enabled_portainer: "{{ True if ((hms_docker_container_map['portainer']['authentik'] is defined and hms_docker_container_map['portainer']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_portainer)) else False }}"
-authentik_enabled_overseerr: "{{ True if ((hms_docker_container_map['overseerr']['authentik'] is defined and hms_docker_container_map['overseerr']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_overseerr)) else False }}"
-authentik_enabled_prowlarr: "{{ True if ((hms_docker_container_map['prowlarr']['authentik'] is defined and hms_docker_container_map['prowlarr']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_prowlarr)) else False }}"
-authentik_enabled_requestrr: "{{ True if ((hms_docker_container_map['requestrr']['authentik'] is defined and hms_docker_container_map['requestrr']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_requestrr)) else False }}"
-authentik_enabled_plex: "{{ True if ((hms_docker_container_map['plex']['authentik'] is defined and hms_docker_container_map['plex']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_plex)) else False }}"
-authentik_enabled_tautulli: "{{ True if ((hms_docker_container_map['tautulli']['authentik'] is defined and hms_docker_container_map['tautulli']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_tautulli)) else False }}"
-authentik_enabled_nzbget: "{{ True if ((hms_docker_container_map['nzbget']['authentik'] is defined and hms_docker_container_map['nzbget']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_nzbget)) else False }}"
-authentik_enabled_sabnzbd: "{{ True if ((hms_docker_container_map['sabnzbd']['authentik'] is defined and hms_docker_container_map['sabnzbd']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_sabnzbd)) else False }}"
-authentik_enabled_authentik: "{{ True if ((hms_docker_container_map['authentik']['authentik'] is defined and hms_docker_container_map['authentik']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_authentik)) else False }}"
-authentik_enabled_tdarr: "{{ True if ((hms_docker_container_map['tdarr']['authentik'] is defined and hms_docker_container_map['tdarr']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_authentik)) else False }}"
-authentik_enabled_homepage: "{{ True if ((hms_docker_container_map['homepage']['authentik'] is defined and hms_docker_container_map['homepage']['authentik']) and (authentik_enabled_globally and authentik_http_proxy_homepage)) else False }}"
-
-authentik_geoip_enabled: "{{ True if ((authentik_geoip_account_id is defined and authentik_geoip_account_id != '') and (authentik_geoip_license_key is defined and authentik_geoip_license_key != '')) else False }}"
-
-
 
 homepage_enabled_traefik: "{{ True if (hms_docker_container_map['traefik']['homepage'] is defined and hms_docker_container_map['traefik']['homepage']) else False }}"
 homepage_enabled_sonarr: "{{ True if (hms_docker_container_map['sonarr']['homepage'] is defined and hms_docker_container_map['sonarr']['homepage']) else False }}"
 homepage_enabled_radarr: "{{ True if (hms_docker_container_map['radarr']['homepage'] is defined and hms_docker_container_map['radarr']['homepage']) else False }}"
-homepage_enabled_bazarr: "{{ True if (hms_docker_container_map['bazarr']['homepage'] is defined and hms_docker_container_map['bazarr']['homepage']) else False }}"
-homepage_enabled_transmission: "{{ True if (hms_docker_container_map['transmission']['homepage'] is defined and hms_docker_container_map['transmission']['homepage']) else False }}"
 homepage_enabled_portainer: "{{ True if (hms_docker_container_map['portainer']['homepage'] is defined and hms_docker_container_map['portainer']['homepage']) else False }}"
-homepage_enabled_overseerr: "{{ True if (hms_docker_container_map['overseerr']['homepage'] is defined and hms_docker_container_map['overseerr']['homepage']) else False }}"
 homepage_enabled_prowlarr: "{{ True if (hms_docker_container_map['prowlarr']['homepage'] is defined and hms_docker_container_map['prowlarr']['homepage']) else False }}"
-homepage_enabled_plex: "{{ True if (hms_docker_container_map['plex']['homepage'] is defined and hms_docker_container_map['plex']['homepage']) else False }}"
-homepage_enabled_tautulli: "{{ True if (hms_docker_container_map['tautulli']['homepage'] is defined and hms_docker_container_map['tautulli']['homepage']) else False }}"
-homepage_enabled_nzbget: "{{ True if (hms_docker_container_map['nzbget']['homepage'] is defined and hms_docker_container_map['nzbget']['homepage']) else False }}"
-homepage_enabled_sabnzbd: "{{ True if (hms_docker_container_map['sabnzbd']['homepage'] is defined and hms_docker_container_map['sabnzbd']['homepage']) else False }}"
-homepage_enabled_authentik: "{{ True if (hms_docker_container_map['authentik']['homepage'] is defined and hms_docker_container_map['authentik']['homepage']) else False }}"
-homepage_enabled_tdarr: "{{ True if (hms_docker_container_map['tdarr']['homepage'] is defined and hms_docker_container_map['tdarr']['homepage']) else False }}"
 
 homepage_stats_enabled_traefik: "{{ True if (hms_docker_container_map['traefik']['homepage_stats'] is defined and hms_docker_container_map['traefik']['homepage_stats']) else False }}"
 homepage_stats_enabled_sonarr: "{{ True if (hms_docker_container_map['sonarr']['homepage_stats'] is defined and hms_docker_container_map['sonarr']['homepage_stats']) else False }}"
 homepage_stats_enabled_radarr: "{{ True if (hms_docker_container_map['radarr']['homepage_stats'] is defined and hms_docker_container_map['radarr']['homepage_stats']) else False }}"
-homepage_stats_enabled_bazarr: "{{ True if (hms_docker_container_map['bazarr']['homepage_stats'] is defined and hms_docker_container_map['bazarr']['homepage_stats']) else False }}"
-homepage_stats_enabled_transmission: "{{ True if (hms_docker_container_map['transmission']['homepage_stats'] is defined and hms_docker_container_map['transmission']['homepage_stats']) else False }}"
 homepage_stats_enabled_portainer: "{{ True if (hms_docker_container_map['portainer']['homepage_stats'] is defined and hms_docker_container_map['portainer']['homepage_stats']) else False }}"
-homepage_stats_enabled_overseerr: "{{ True if (hms_docker_container_map['overseerr']['homepage_stats'] is defined and hms_docker_container_map['overseerr']['homepage_stats']) else False }}"
 homepage_stats_enabled_prowlarr: "{{ True if (hms_docker_container_map['prowlarr']['homepage_stats'] is defined and hms_docker_container_map['prowlarr']['homepage_stats']) else False }}"
-homepage_stats_enabled_plex: "{{ True if (hms_docker_container_map['plex']['homepage_stats'] is defined and hms_docker_container_map['plex']['homepage_stats']) else False }}"
-homepage_stats_enabled_tautulli: "{{ True if (hms_docker_container_map['tautulli']['homepage_stats'] is defined and hms_docker_container_map['tautulli']['homepage_stats']) else False }}"
-homepage_stats_enabled_nzbget: "{{ True if (hms_docker_container_map['nzbget']['homepage_stats'] is defined and hms_docker_container_map['nzbget']['homepage_stats']) else False }}"
-homepage_stats_enabled_sabnzbd: "{{ True if (hms_docker_container_map['sabnzbd']['homepage_stats'] is defined and hms_docker_container_map['sabnzbd']['homepage_stats']) else False }}"
-homepage_stats_enabled_authentik: "{{ True if (hms_docker_container_map['authentik']['homepage_stats'] is defined and hms_docker_container_map['authentik']['homepage_stats']) else False }}"
-homepage_stats_enabled_tdarr: "{{ True if (hms_docker_container_map['tdarr']['homepage_stats'] is defined and hms_docker_container_map['tdarr']['homepage_stats']) else False }}"
-
-
 
 # Misc variables
 nas_enable_additional_paths: "{{ True if (nas_client_remote_additional_paths is defined and nas_client_use_additional_paths is defined and nas_client_use_additional_paths) else False }}"
-transmission_custom_download_path_enabled: "{{ True if ((transmission_custom_download_path is defined and transmission_custom_download_path) and (transmission_use_custom_download_path is defined and transmission_use_custom_download_path) and (transmission_use_nas_for_downloads is not defined or not transmission_use_nas_for_downloads)) else False }}"
-transmission_use_nas_enabled: "{{ True if ((transmission_use_nas_for_downloads is defined and transmission_use_nas_for_downloads) and (hms_docker_media_share_type == 'nfs' or hms_docker_media_share_type == 'cifs')) else False }}"
-tautulli_jbops_enabled: "{{ True if (tautulli_include_jbops is defined and tautulli_include_jbops) else False }}"
 #######################################################################
 
 #######################################################################

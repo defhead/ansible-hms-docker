@@ -8,7 +8,6 @@
     - "{{ hms_docker_apps_path }}"
     - "{{ hms_docker_mount_path }}"
     - "{{ hms_docker_media_path }}"
-    - "{{ transmission_custom_download_path }}"
   when: item is defined and item != ''
 
 - name: NAS base configuration tasks.
@@ -35,39 +34,13 @@
   with_dict: "{{ hms_docker_container_map }}"
   when: item.value.directory and (item.value.enabled is defined and item.value.enabled)
 
-- name: Ensure separate 4K container config directories exist if enabled.
-  ansible.builtin.file:
-    path: "{{ hms_docker_apps_path }}/{{ item.key }}-{{ separate_4k_instances_suffix }}/config"
-    state: directory
-  with_dict: "{{ hms_docker_container_map }}"
-  when: 
-    - item.value.directory
-    - item.value.enabled is defined and item.value.enabled
-    - item.key == 'sonarr' or item.key == 'radarr'
-    - separate_4k_instances_enable is defined and separate_4k_instances_enable
-
 - name: Ensure Traefik
   import_tasks: "traefik.yml"
   when: container_enabled_traefik
 
-- name: Ensure Authentik
-  import_tasks: "authentik.yml"
-  when: ((container_enabled_authentik) or 
-        (authentik_enabled)) and 
-        (traefik_ssl_enabled)
-
 - name: Ensure homepage
   ansible.builtin.import_tasks: "homepage.yml"
   when: container_enabled_homepage
-
-- name: Ensure JBOPS if enabled
-  ansible.builtin.git:
-    repo: https://github.com/blacktwin/JBOPS
-    clone: true
-    dest: "{{ tautulli_jbops_install_path }}"
-  diff: false
-  changed_when: false
-  when: tautulli_jbops_enabled
 
 - name: Ensure env
   ansible.builtin.template:
@@ -82,10 +55,6 @@
   no_log: true
   register: compose_env
   vars:
-  - authentik_key: "{{ (slurped_key_data['content'] | b64decode) if slurped_key_data['content'] is defined else '### Will be obtained during full run ###' }}"
-  - authentik_pgpass: "{{ (slurped_pg_pass_data['content'] | b64decode) if slurped_pg_pass_data['content'] is defined else '### Will be obtained during full run ###' }}"
-  - authentik_pgu: "{{ authentik_old_pg_user if authentik_old_pg_user is defined and authentik_old_pg_user != '' else authentik_pg_user }}"
-  - authentik_pgdb: "{{ authentik_old_pg_db if authentik_old_pg_db is defined and authentik_old_pg_db != '' else authentik_pg_db }}"
   - watchtower_key: "{{ (slurped_watchtower_key_data['content'] | b64decode) if slurped_watchtower_key_data['content'] is defined else '### Will be obtained during full run ###' }}"
 
 - name: Ensure docker-compose.yml file.
@@ -107,36 +76,3 @@
     remove_orphans: "{{ container_remove_orphans }}"
     # env_file: "{{ compose_env.dest }}" # Commented out since this module defaults to using the .env file within the project_src location, but leaving just in case advanced users wish to point to a different location
   when: not ansible_check_mode
-
-- name: Sabnzbd additional config
-  when: container_enabled_sabnzbd
-  block:
-    - name: Get current sabnzbd config file contents
-      ansible.builtin.slurp:
-        path: "{{ hms_docker_apps_path }}/sabnzbd/config/sabnzbd.ini"
-      register: slurped_sabnzbd_data
-      check_mode: false
-      no_log: true
-
-    - name: Pull current sabnzbd allowed hosts
-      ansible.builtin.set_fact:
-        slurped_sabnzbd_hostlist: "{{ slurped_sabnzbd_data['content'] | b64decode | regex_search('(?<=host_whitelist = ).*') | split(',') }}"
-        cacheable: false
-      when: slurped_sabnzbd_data['content'] is defined
-      no_log: true
-
-    - name: Ensure sabnzbd container config has allowlisted hostname
-      ansible.builtin.replace:
-        path: "{{ hms_docker_apps_path }}/sabnzbd/config/sabnzbd.ini"
-        regexp: '(?<=host_whitelist = ).*'
-        replace: "{{ slurped_sabnzbd_hostlist | join(',') }}{{ hms_docker_container_map['sabnzbd']['proxy_host_rule'] }}.{{ hms_docker_domain }}"
-      when: hms_docker_container_map['sabnzbd']['proxy_host_rule'] + "." + hms_docker_domain not in slurped_sabnzbd_hostlist
-      notify: restart sabnzbd
-
-- name: Ensure Plex SSL script and resources
-  ansible.builtin.import_tasks: "plex_ssl.yml"
-  when: hms_docker_plex_ssl_enabled and traefik_ssl_enabled
-
-- name: Ensure Transmission and VPN connection
-  import_tasks: "transmission.yml"
-  when: container_enabled_transmission

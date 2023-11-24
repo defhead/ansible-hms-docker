@@ -29,11 +29,11 @@ hms_docker_library_folders:
   [
     {
       type: "movies",
-      folder_name: "Movies"
+      folder_name: "movies"
     },
     {
       type: "tv_shows",
-      folder_name: "TV_Shows"
+      folder_name: "tv"
     },
   ]
 

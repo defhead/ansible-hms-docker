@@ -14,11 +14,6 @@
     ansible.builtin.include_vars:
       dir: vars/custom
 
-  - name: Ensure Nvidia GPU role if enabled
-    ansible.builtin.import_role:
-      name: gpu
-    when: enable_nvidia_gpu is defined and enable_nvidia_gpu
-
   - name: Ensure HMS-Docker role
     ansible.builtin.import_role:
       name: hmsdocker
